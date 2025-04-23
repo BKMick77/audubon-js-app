@@ -128,3 +128,9 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# macOS folder metadata
+.DS_Store
+
+# third-party minified accessibility script
+js/tota11y.min.js
