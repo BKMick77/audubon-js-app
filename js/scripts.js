@@ -6,11 +6,8 @@ pokemon = [
 ];
 
 for (let i = 0; i < pokemon.length; i++) {
-    //    added <br> to separate pokemon
+    let bigPokemon = pokemon[i].height >= 6 ? " - That's a big Pokemon!" : '';
     document.write(
-        pokemon[i].name + ' (Height: ' + pokemon[i].height + 'm)<br>'
+        `${pokemon[i].name} (Height: ${pokemon[i].height}m) ${bigPokemon} <br>`
     );
-    if (pokemon[i].height >= 6) {
-        document.write("That's a big Pokemon!<br>");
-    }
 }
