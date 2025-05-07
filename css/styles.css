@@ -13,3 +13,37 @@ body {
     padding: 15px;
     border-bottom: 0.1px solid rgba(240, 248, 255, 0.3);
 }
+
+.button-class {
+    border: none;
+    display: inline-block;
+    font-family: inherit;
+    background-color: #ffcb03;
+    color: #2e70b7;
+    font-size: 36px;
+    text-decoration: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    border-bottom: 5px solid rgba(0, 0, 0, 0.3);
+    transition: opacity 0.2s;
+    transition: background-color 0.4s;
+    width: 250px;
+}
+
+button:hover,
+button:focus,
+.button:hover,
+.button:focus {
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+button:active {
+    background-color: #2e70b7;
+    color: #ffcb03;
+}
+
+ul {
+    list-style-type: none;
+}
