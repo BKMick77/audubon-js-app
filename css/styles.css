@@ -46,4 +46,5 @@ button:active {
 
 ul {
     list-style-type: none;
+    columns: 5;
 }
