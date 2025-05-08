@@ -1,10 +1,6 @@
 let pokemonRepository = (function () {
-    let pokemon = [
-        { name: 'Pidgey', height: 0.3, type: ['flying', 'normal'] },
-        { name: 'Gyarados', height: 6.5, type: ['flying', 'water'] },
-        { name: 'Gastly', height: 1.3, type: ['ghost', 'poison'] },
-        { name: 'Scizor', height: 1.8, type: ['steel', 'bug'] },
-    ];
+    let pokemon = [];
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
     function add(p) {
         pokemon.push(p);
@@ -15,7 +11,9 @@ let pokemonRepository = (function () {
     }
 
     function showDetails(pokemon) {
-        console.log(pokemon);
+        loadDetails(pokemon).then(function () {
+            console.log(pokemon);
+        });
     }
 
     function addListItem(pokemon) {
@@ -27,25 +25,58 @@ let pokemonRepository = (function () {
         listItem.appendChild(button);
         pokemonList.appendChild(listItem);
         button.addEventListener('click', () => {
-            showDetails(pokemon.name);
+            showDetails(pokemon);
         });
+    }
+
+    function loadList() {
+        return fetch(apiUrl)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (json) {
+                json.results.forEach(function (item) {
+                    let pokemon = {
+                        name: item.name,
+                        detailsUrl: item.url,
+                    };
+                    add(pokemon);
+                });
+            })
+            .catch(function (e) {
+                console.error(e);
+            });
+    }
+
+    function loadDetails(item) {
+        let url = item.detailsUrl;
+        return fetch(url)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (details) {
+                item.imageUrl = details.sprites.front_default;
+                item.height = details.height;
+                item.types = details.types;
+            })
+            .catch(function (e) {
+                console.error(e);
+            });
     }
 
     return {
         getAll: getAll,
         add: add,
         addListItem: addListItem,
+        loadList: loadList,
+        loadDetails: loadDetails,
     };
 })();
 
-pokemonRepository.add({
-    name: 'Bulbasaur',
-    height: 0.7,
-    type: ['grass', 'poison'],
-});
-
-pokemonRepository.getAll().forEach((pokemon) => {
-    // let bigPokemon = pokemon.height >= 6 ? " - That's a big Pokemon!" : '';
-    // );
-    pokemonRepository.addListItem(pokemon);
+pokemonRepository.loadList().then(function () {
+    pokemonRepository.getAll().forEach((pokemon) => {
+        // let bigPokemon = pokemon.height >= 6 ? " - That's a big Pokemon!" : '';
+        // );
+        pokemonRepository.addListItem(pokemon);
+    });
 });
