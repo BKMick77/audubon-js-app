@@ -134,3 +134,5 @@ dist
 
 # third-party minified accessibility script
 js/tota11y.min.js
+
+.vscode/
