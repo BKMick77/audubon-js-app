@@ -10,9 +10,22 @@ let pokemonRepository = (function () {
         return pokemon;
     }
 
+    function capitalize(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
     function showDetails(pokemon) {
-        loadDetails(pokemon).then(function () {
-            console.log(pokemon);
+        console.log(pokemon);
+        pokemonRepository.loadDetails(pokemon).then(function () {
+            let types = pokemon.types
+                .map((typeSlot) => typeSlot.type.name)
+                .join(', ');
+            let content = `Height: ${pokemon.height}m 
+                Weight: ${pokemon.weight}kg
+                Type: ${types}`;
+            let image = pokemon.imageUrl;
+
+            modalModule.showModal(capitalize(pokemon.name), content, image);
         });
     }
 
@@ -20,7 +33,7 @@ let pokemonRepository = (function () {
         let pokemonList = document.querySelector('.pokemon-list');
         let listItem = document.createElement('li');
         let button = document.createElement('button');
-        button.innerText = pokemon.name;
+        button.innerText = capitalize(pokemon.name);
         button.classList.add('button-class');
         listItem.appendChild(button);
         pokemonList.appendChild(listItem);
@@ -55,9 +68,12 @@ let pokemonRepository = (function () {
                 return response.json();
             })
             .then(function (details) {
-                item.imageUrl = details.sprites.front_default;
+                // item.imageUrl = details.sprites.front_default;
                 item.height = details.height;
                 item.types = details.types;
+                item.imageUrl =
+                    details.sprites.other['official-artwork'].front_default;
+                item.weight = details.weight;
             })
             .catch(function (e) {
                 console.error(e);
@@ -70,6 +86,7 @@ let pokemonRepository = (function () {
         addListItem: addListItem,
         loadList: loadList,
         loadDetails: loadDetails,
+        // showModal: showModal,
     };
 })();
 
