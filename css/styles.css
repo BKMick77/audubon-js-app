@@ -102,8 +102,8 @@ ul {
 }
 
 .modal img {
-    width: 100%; /* increase from 150px or auto */
-    height: auto; /* keep proportions */
+    width: 100%;
+    height: auto;
     margin-top: 10px;
     display: block;
     margin-left: auto;
