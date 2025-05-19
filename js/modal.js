@@ -11,7 +11,7 @@ let modalModule = (function () {
         // New modal content
         let closeButtonElement = document.createElement('button');
         closeButtonElement.classList.add('modal-close');
-        closeButtonElement.innerText = 'Close';
+        closeButtonElement.innerText = '×';
         closeButtonElement.addEventListener('click', hideModal);
 
         let titleElement = document.createElement('h1');
