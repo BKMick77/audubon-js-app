@@ -1,20 +1,13 @@
 let modalModule = (function () {
     function showModal(title, text, imgURL) {
-        let modalContainer = document.querySelector('#modal-container');
+        let modalTitle = document.querySelector('#modal-title');
+        let modalBody = document.querySelector('#modal-body');
 
-        // clears previous content
-        modalContainer.innerHTML = '';
+        modalTitle.innerHTML = '';
+        modalBody.innerHTML = '';
 
-        let modal = document.createElement('div');
-        modal.classList.add('modal');
-
-        // New modal content
-        let closeButtonElement = document.createElement('button');
-        closeButtonElement.classList.add('modal-close');
-        closeButtonElement.innerText = '×';
-        closeButtonElement.addEventListener('click', hideModal);
-
-        let titleElement = document.createElement('h1');
+        let titleElement = document.createElement('h5');
+        titleElement.classList.add('modal-title');
         titleElement.innerText = title;
 
         let contentElement = document.createElement('p');
@@ -22,43 +15,20 @@ let modalModule = (function () {
 
         let imageElement = document.createElement('img');
         imageElement.src = imgURL;
+        imageElement.classList.add('img-fluid');
 
-        modal.appendChild(closeButtonElement);
-        modal.appendChild(titleElement);
-        modal.appendChild(contentElement);
-        modal.appendChild(imageElement);
+        modalTitle.appendChild(titleElement);
+        modalBody.appendChild(contentElement);
+        modalBody.appendChild(imageElement);
         modalContainer.appendChild(modal);
 
-        modalContainer.classList.add('is-visible');
-
-        modalContainer.addEventListener('click', (e) => {
-            let target = e.target;
-            if (target === modalContainer) {
-                hideModal();
-            }
-        });
+        let modal = new bootstrap.Modal(
+            document.querySelector('.example-modal')
+        );
+        modal.show();
     }
-
-    function hideModal() {
-        let modalContainer = document.querySelector('#modal-container');
-        modalContainer.classList.remove('is-visible');
-    }
-
-    window.addEventListener('keydown', (e) => {
-        let modalContainer = document.querySelector('#modal-container');
-        if (
-            e.key === 'Escape' &&
-            modalContainer.classList.contains('is-visible')
-        ) {
-            hideModal();
-        }
-    });
 
     return {
         showModal: showModal,
     };
-
-    // document.querySelector('#show-modal').addEventListener('click', () => {
-    //     showModal('Modal title', 'This is the modal content');
-    // });
 })();
