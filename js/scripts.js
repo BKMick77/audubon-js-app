@@ -18,7 +18,7 @@ let pokemonRepository = (function () {
         console.log(pokemon);
         pokemonRepository.loadDetails(pokemon).then(function () {
             let types = pokemon.types
-                .map((typeSlot) => typeSlot.type.name)
+                .map((PType) => PType.type.name)
                 .join(', ');
             let content = `Height: ${pokemon.height}m 
                 Weight: ${pokemon.weight}kg
