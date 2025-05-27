@@ -9,7 +9,7 @@
     -   Height
     -   Weight
     -   Type
-        -Image
+    -  Image
 -   Responsive layout
 
 ## Technology Used
