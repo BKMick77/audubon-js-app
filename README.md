@@ -1,4 +1,4 @@
-# Pokédex JavaScript Web App
+# Pokédex Web App
 
 ## App Features
 
