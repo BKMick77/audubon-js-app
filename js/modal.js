@@ -1,4 +1,4 @@
-let modalModule = (function () {
+(function () {
     function showModal(title, text, imgURL) {
         let modalTitle = document.querySelector('#modal-title');
         let modalBody = document.querySelector('#modal-body');
