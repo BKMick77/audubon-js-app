@@ -1,8 +1,8 @@
-# Pokedex
+# Pokédex JavaScript Web App
 
 ## App Features
 
--   Loads data of 150 Pokemon from pokeApi
+-   Loads data of 150 Pokémon from PokéApi
 -   Displays each pokemon as a styled button with name and image
 -   Button click displays styled modal with
     -   Name
